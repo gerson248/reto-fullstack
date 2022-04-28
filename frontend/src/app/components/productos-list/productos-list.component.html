@@ -1,0 +1,43 @@
+<label for="" class="ms-4 h4">Buscador</label>
+<input type="text" class="form-control mb-4" placeholder="Escribe tu busqueda aquí" [(ngModel)]="term">
+<div class="row d-flex justify-content-center">
+
+
+
+  <div *ngFor="let producto of (productos |filter:term |filtername:term)  "
+    class="card  col-sm-12 col-md-3 ms-2 shadow-sm mb-2">
+    <div>
+
+      <div>
+        <img [src]="producto.url" class="card-img" alt="producto">
+      </div>
+      <div>
+        <ul>
+          <small>
+            {{producto.id}}
+          </small>
+          <div>
+            {{producto.marca}}
+          </div>
+          <div>
+            {{producto.nombre}}
+          </div>
+          <small>
+            Creado: {{producto.createdAt}}
+          </small>
+          <div class="text-danger h5 mt-4 ">
+            S/{{producto.precio}}
+          </div>
+        </ul>
+        <button class=" btn btn-primary m-3" [routerLink]="['/producto/editar/',producto.id]"> Editar </button>
+        <button class="btn btn-danger" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+          [popoverMessage]="popoverMessage" placement="left" (confirm)="deleteProducto(producto.id)"
+          (cancel)="cancelClicked = true">
+          Eliminar
+        </button>
+      </div>
+
+
+    </div>
+  </div>
+</div>
